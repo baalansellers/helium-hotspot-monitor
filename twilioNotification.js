@@ -8,9 +8,16 @@ exports.notifyOnOutage = function() {
     });
 }
 
-exports.notifyDailyActivity = function(reward24, reward30, priceHNT) {
+exports.notifyDailyActivity = function(reward24, reward30, priceHNT, rewardScale, gain, status) {
     admins.forEach(function(admin) {
-        var messageToSend = 'Daily Stats:\n24Hr: ' + Math.round(reward24) + '\n30Day: ' + Math.round(reward30);
+        var messageToSend = 'Hotspot Status: ' + status + '\n';
+
+        messageToSend += 'Reward Scale: ' + rewardScale + '\n';
+        messageToSend += 'Gain: ' + gain + '\n';
+        
+        messageToSend += '\nDaily Stats:\n'
+        messageToSend += '24-Hour: ' + Math.round(reward24) + '\n';
+        messageToSend += '30-Day: ' + Math.round(reward30);
 
         if (!isNaN(priceHNT) && priceHNT > 0) {
             messageToSend += '\nPrice: $' + priceHNT + '\n\nFULL Value:\n24Hr: $' + Math.round(reward24 * priceHNT * 100) / 100 + '\n30Day: $' + Math.round(reward30 * priceHNT * 100) / 100;
