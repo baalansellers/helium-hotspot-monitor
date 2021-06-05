@@ -1,0 +1,17 @@
+const config = require('./config');
+
+module.exports.sendSms = function(to, message) {
+  const client = require('twilio')(config.accountSid, config.authToken);
+  
+  return client.api.messages
+    .create({
+      body: message,
+      to: to,
+      from: config.sendingNumber,
+    }).then(function(data) {
+      console.log('Administrator notified');
+    }).catch(function(err) {
+      console.error('Could not notify administrator');
+      console.error(err);
+    });
+};
