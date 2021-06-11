@@ -27,3 +27,15 @@ exports.notifyDailyActivity = function(reward24, reward30, priceHNT, rewardScale
         twilioClient.sendSms(admin.phoneNumber, messageToSend);
     });
 }
+
+exports.notifyPriceDfiHigh = (price) => {
+    admins.forEach((admin) => {
+        twilioClient.sendSms(admin.phoneNumber, 'DFI Price is High @ $' + price);
+    })
+}
+
+exports.notifyPriceDfiLow = (price) => {
+    admins.forEach((admin) => {
+        twilioClient.sendSms(admin.phoneNumber, 'DFI Price is Low @ $' + price);
+    })
+}
